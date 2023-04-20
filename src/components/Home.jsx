@@ -16,8 +16,8 @@ export default function Home() {
       <h1 className="bold text-red-300">Hi there, Welcome to the site!</h1>
       <div className="card">
         <p>
-          A site build on React Vite & Firebase for backend and User
-          Authentication
+          A Web App build on React Vite & Firebase for backend with User
+          Authentication.
         </p>
       </div>
       <div>

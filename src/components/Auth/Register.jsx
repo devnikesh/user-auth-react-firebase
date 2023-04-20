@@ -1,11 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Input from "../Input";
 import { useTitle } from "../../hook/useTitle";
+import useAuth from "../../hook/useAuth";
 
 export default function Register() {
   const [details, setDetails] = useState();
   useTitle("Register");
+  const { signUp } = useAuth();
+
+  function handleSubmit(event) {
+    console.log(details);
+    event.preventDefault();
+    signUp(details.email, details.password, details.name);
+  }
 
   const handleChange = (e) => {
     setDetails({ ...details, [e.target.name]: e.target.value });
@@ -80,6 +88,7 @@ export default function Register() {
           </div>
           <button
             type="submit"
+            onClick={handleSubmit}
             className="text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
           >
             Register new account

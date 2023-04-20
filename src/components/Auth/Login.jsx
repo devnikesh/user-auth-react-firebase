@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Input from "../Input";
 import { useTitle } from "../../hook/useTitle";
+import useAuth from "../../hook/useAuth";
 
 export default function Login() {
   const [details, setDetails] = useState();
@@ -10,9 +11,14 @@ export default function Login() {
   const handleChange = (e) => {
     setDetails({ ...details, [e.target.name]: e.target.value });
   };
-  useEffect(() => {
-    console.log(details);
-  }, [details]);
+
+  const { logIn } = useAuth();
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    logIn(details.email, details.password);
+  }
+
   return (
     <div className="flex items-center justify-center mt-10">
       <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
@@ -64,6 +70,7 @@ export default function Login() {
           </div>
           <button
             type="submit"
+            onClick={handleSubmit}
             className="w-full text-white bg-red-400 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
           >
             Login to your account
